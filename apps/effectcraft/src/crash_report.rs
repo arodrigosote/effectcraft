@@ -359,7 +359,7 @@ fn write_report(
     let mut report = OpenOptions::new().write(true).create_new(true).open(&path)?;
     writeln!(
         report,
-        "EffectCraft unexpected-exit diagnostic\nVersion: {}\nPlatform: {} / {}\nSession: {id}",
+        "ICASYS Efectos unexpected-exit diagnostic\nVersion: {}\nPlatform: {} / {}\nSession: {id}",
         env!("CARGO_PKG_VERSION"),
         std::env::consts::OS,
         std::env::consts::ARCH
@@ -389,9 +389,9 @@ fn description(saved: &io::Result<PathBuf>, confirmed_exit: bool) -> String {
         Err(error) => format!("A diagnostic report could not be saved: {error}"),
     };
     let incident =
-        if confirmed_exit { "EffectCraft stopped unexpectedly." } else { "EffectCraft lost its diagnostic control channel; process exit is not confirmed." };
+        if confirmed_exit { "ICASYS Efectos stopped unexpectedly." } else { "ICASYS Efectos lost its diagnostic control channel; process exit is not confirmed." };
     format!(
-        "{incident}\n\n{diagnostic}\n\nThe exact cause is unknown. If EffectCraft has closed, reopen it to check for an existing auto-save. Changes since the last auto-save may be lost.\n\nNo report has been sent anywhere."
+        "{incident}\n\n{diagnostic}\n\nThe exact cause is unknown. If ICASYS Efectos has closed, reopen it to check for an existing auto-save. Changes since the last auto-save may be lost.\n\nNo report has been sent anywhere."
     )
 }
 

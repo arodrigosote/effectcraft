@@ -1,0 +1,18 @@
+{
+  "app": "effectcraft",
+  "name": "ICASYS Efectos",
+  "slug": "efectos",
+  "upstream_name": "EffectCraft",
+  "upstream_base": "582344dd4ef462362c02e56e3094de7af01847ab",
+  "owner": "arodrigosote",
+  "es_ui": true,
+  "deb_section": "video",
+  "cli": "effectcraft-cli",
+  "cli_project_ext": "ecproj",
+  "mcp": {
+    "headless": "mcp --demo",
+    "attach": "mcp --bridge 9876",
+    "auth": "none",
+    "project": "--project proyecto.ecproj"
+  }
+}

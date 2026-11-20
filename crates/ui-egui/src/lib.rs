@@ -15,6 +15,9 @@ pub(crate) mod a11y;
 pub const UPDATE_APP: craft_update::app::App = craft_update::app::App {
     icon_png: Some(include_bytes!("../../../assets/app-icon/hicolor/128x128/apps/ai.storyteller.effectcraft.png")),
     accent: Some([0xe0, 0x36, 0x8f]),
+    name: "ICASYS Efectos",
+    developer: "ICASYS",
+    repo: "arodrigosote/effectcraft",
     ..craft_update::suite::EFFECTCRAFT
 };
 

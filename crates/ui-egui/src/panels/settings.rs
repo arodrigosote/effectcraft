@@ -106,7 +106,7 @@ fn page_ui(app: &mut EffectcraftApp, ui: &mut egui::Ui, page: &Page, cur: &Value
             Item::Setting { key, label, kind, live } => {
                 let v = get(key);
                 let id = format!("settings.{key}");
-                let tip = (!live).then(|| tr("Stored, but not used by EffectCraft yet"));
+                let tip = (!live).then(|| tr("Stored, but not used by ICASYS Efectos yet"));
                 let mut resp: Option<egui::Response> = None;
                 // What the control is set to, for assistive technology.
                 let mut value_text = String::new();
@@ -277,9 +277,9 @@ pub(crate) fn disk_cache_limit_lines(max: u64, limit: u64, reserve: Option<u64>,
     let mut lines = vec![tr_args("Disk cache limit in effect: {} MB", &[&(limit.min(max) >> 20)])];
     if limit < max {
         lines.push(match reserve {
-            Some(r) => tr_args("Limited by free disk space: EffectCraft keeps {} GB of this disk free.", &[&format!("{:.1}", r as f64 / GB)]),
+            Some(r) => tr_args("Limited by free disk space: ICASYS Efectos keeps {} GB of this disk free.", &[&format!("{:.1}", r as f64 / GB)]),
             None => tr_args(
-                "Limited by free disk space: EffectCraft keeps 5% of the disk free (at least {} GB, at most {} GB).",
+                "Limited by free disk space: ICASYS Efectos keeps 5% of the disk free (at least {} GB, at most {} GB).",
                 &[&(MIN_DISK_RESERVE >> 30), &(MAX_DISK_RESERVE >> 30)],
             ),
         });
@@ -310,7 +310,7 @@ fn theme_preview(ui: &mut egui::Ui, kind: ThemeKind, width: f32) {
     painter.rect_filled(
         Rect::from_min_max(pos2(bar.right() - 22.0, bar.top() + 3.0), pos2(bar.right() - 4.0, bar.bottom() - 3.0)),
         3.5,
-        egui::Color32::from_rgb(0x58, 0x65, 0xf2),
+        egui::Color32::from_rgb(0x01, 0x4b, 0xa0),
     );
     let gap = 2.0;
     let body = Rect::from_min_max(pos2(rect.left() + gap, bar.bottom() + gap), pos2(rect.right() - gap, rect.bottom() - gap));
@@ -704,10 +704,10 @@ fn library_card_ui(app: &mut EffectcraftApp, ui: &mut egui::Ui, t: &Tokens, p: &
                 ui.label(RichText::new(v).color(t.text_dim));
             }
             let state = match (&installed, restart, update) {
-                (_, true, _) => tr("Restart EffectCraft to finish").to_string(),
+                (_, true, _) => tr("Restart ICASYS Efectos to finish").to_string(),
                 (Some(v), _, true) => tr_args("Installed {}: update available", &[v]),
                 (Some(v), _, _) => tr_args("Installed {}", &[v]),
-                (None, _, _) if newer_app && p["latest"].is_null() => tr("Needs a newer EffectCraft").to_string(),
+                (None, _, _) if newer_app && p["latest"].is_null() => tr("Needs a newer ICASYS Efectos").to_string(),
                 _ => String::new(),
             };
             ui.label(RichText::new(state).color(if installed.is_some() { t.accent } else { t.text_dim }));
@@ -1188,7 +1188,7 @@ pub fn recovery(app: &mut EffectcraftApp, ctx: &egui::Context, t: &Tokens) {
     };
     let mut choice: Option<&str> = None;
     super::dialogs::modal(ctx, "Recover Project", vec2(560.0, 230.0), t, |ui| {
-        ui.label(tr("EffectCraft didn't quit normally last time."));
+        ui.label(tr("ICASYS Efectos didn't quit normally last time."));
         ui.add_space(6.0);
         if let Some(p) = &r.project {
             ui.label(tr_args("Project: {}", &[&p]));
@@ -1308,7 +1308,7 @@ mod tests {
         assert_eq!(shown(&mut app).unwrap(), "limitMb=0 maxMb=20480 reserveMb=10240 spaceLimited=true writes=false");
         assert_eq!(
             text(),
-            "Disk cache limit in effect: 0 MB Limited by free disk space: EffectCraft keeps 10.0 GB of this disk free. No room left: nothing is written to the disk cache until disk space is freed."
+            "Disk cache limit in effect: 0 MB Limited by free disk space: ICASYS Efectos keeps 10.0 GB of this disk free. No room left: nothing is written to the disk cache until disk space is freed."
         );
         // 12 GB free: 2 GB for the cache.
         dc.set_disk_space(Some((4096 * GB, 12 * GB)));
@@ -1320,7 +1320,7 @@ mod tests {
         // Without the disk's size, the rule from the constants.
         assert_eq!(
             disk_cache_limit_lines(20 * GB, GB, None, true)[1],
-            "Limited by free disk space: EffectCraft keeps 5% of the disk free (at least 2 GB, at most 10 GB)."
+            "Limited by free disk space: ICASYS Efectos keeps 5% of the disk free (at least 2 GB, at most 10 GB)."
         );
         // No disk cache: no line.
         app.session.disk_cache = None;

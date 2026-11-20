@@ -128,7 +128,7 @@ pub fn format_size(bytes: u64) -> String {
 /// The Kind column: what a recent file is, by its extension, in the interface language.
 fn kind_of(path: &str) -> &'static str {
     tr(match std::path::Path::new(path).extension().and_then(std::ffi::OsStr::to_str).map(str::to_ascii_lowercase).as_deref() {
-        Some("ecproj") => "EffectCraft project",
+        Some("ecproj") => "ICASYS Efectos project",
         Some("aep" | "aepx") => "After Effects project",
         Some("json" | "lottie") => "Lottie animation",
         _ => "Project",
@@ -285,10 +285,10 @@ fn rail_ui(app: &mut EffectcraftApp, ui: &mut egui::Ui, p: &egui::Painter, rail:
     }
     // Community links at the foot (below the pages when the window is short).
     let links = [
-        (Icon::Chat, "Join the ArtCraft Discord", "help.discord"),
-        (Icon::Globe, "getartcraft.com", "help.website"),
-        (Icon::Globe, "EffectCraft home page", "help.appPage"),
-        (Icon::Code, "EffectCraft on GitHub", "help.github"),
+        (Icon::Chat, "ICASYS Community", "help.discord"),
+        (Icon::Globe, "icasys.mx", "help.website"),
+        (Icon::Globe, "ICASYS Efectos home page", "help.appPage"),
+        (Icon::Code, "ICASYS Efectos on GitHub", "help.github"),
     ];
     let sib = effectcraft_engine::links::SIBLINGS;
     let sib_rows = sib.len().div_ceil(2) as f32;
@@ -302,7 +302,7 @@ fn rail_ui(app: &mut EffectcraftApp, ui: &mut egui::Ui, p: &egui::Painter, rail:
         let resp = ui.interact(r, egui::Id::unique(("home-link", cmd)), Sense::click());
         let discord = cmd == "help.discord";
         if discord {
-            p.rect_filled(r, 13.0, Color32::from_rgb(0x58, 0x65, 0xf2));
+            p.rect_filled(r, 13.0, Color32::from_rgb(0x01, 0x4b, 0xa0));
         } else if resp.hovered() {
             p.rect_filled(r, 13.0, t.hover);
         }
@@ -315,7 +315,7 @@ fn rail_ui(app: &mut EffectcraftApp, ui: &mut egui::Ui, p: &egui::Painter, rail:
         }
         cy += 30.0;
     }
-    p.text(pos2(x0, cy + 8.0), Align2::LEFT_CENTER, tr("More ArtCraft apps"), Tokens::ui(11.0), t.text_faint);
+    p.text(pos2(x0, cy + 8.0), Align2::LEFT_CENTER, tr("More ICASYS apps"), Tokens::ui(11.0), t.text_faint);
     cy += 20.0;
     let sw = (w - 6.0) / 2.0;
     for (i, (name, slug)) in sib.iter().enumerate() {
@@ -342,7 +342,7 @@ fn home_page(
     let t = app.tokens;
     let (x0, w) = (area.min.x, area.width());
     let mut y = area.min.y;
-    p.text(pos2(x0, y + 14.0), Align2::LEFT_CENTER, tr("Welcome to EffectCraft"), Tokens::semibold(26.0), t.tab_text_active);
+    p.text(pos2(x0, y + 14.0), Align2::LEFT_CENTER, tr("Welcome to ICASYS Efectos"), Tokens::semibold(26.0), t.tab_text_active);
     y += 40.0;
     p.text(
         pos2(x0, y + 8.0),
@@ -559,7 +559,7 @@ mod tests {
         assert_eq!(format_ago(now, now - 30 * 86_400), "2026-08-22");
         assert_eq!(format_ago(now, now + 100), "Just now");
         assert_eq!((format_size(900), format_size(13_000), format_size(3_500_000)), ("900 B".into(), "13 KB".into(), "3.3 MB".into()));
-        assert_eq!((kind_of("/a/B.ecproj"), kind_of("c.AEP"), kind_of("x")), ("EffectCraft project", "After Effects project", "Project"));
+        assert_eq!((kind_of("/a/B.ecproj"), kind_of("c.AEP"), kind_of("x")), ("ICASYS Efectos project", "After Effects project", "Project"));
         // After a week it is the date, whole even for a five-digit year.
         assert_eq!(format_ago(i64::MAX, 253_402_300_800), "10000-01-01");
     }
@@ -571,7 +571,7 @@ mod tests {
         let now = 1_790_000_000;
         crate::i18n::set_current("zh-hans");
         let shown = (format_ago(now, now - 5), format_ago(now, now - 3 * 3_600), format_ago(now, now - 90_000), kind_of("/a/B.ecproj"));
-        let catalog = (tr("Just now").to_string(), tr_args("{} hours ago", &[&3]), tr("Yesterday").to_string(), tr("EffectCraft project"));
+        let catalog = (tr("Just now").to_string(), tr_args("{} hours ago", &[&3]), tr("Yesterday").to_string(), tr("ICASYS Efectos project"));
         crate::i18n::set_current("en");
         assert_eq!(shown, catalog);
         assert_eq!(tr("Filter recent files"), "Filter recent files");
